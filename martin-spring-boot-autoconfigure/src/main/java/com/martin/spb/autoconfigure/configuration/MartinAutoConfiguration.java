@@ -1,11 +1,13 @@
 package com.martin.spb.autoconfigure.configuration;
 
 import com.martin.spb.autoconfigure.properties.MartinProperties;
+import com.martin.spb.autoconfigure.service.DLockService;
 import com.martin.spb.autoconfigure.service.MartinService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * 类MartinAutoCOnfiguration的实现描述：autoconfig入口
@@ -20,5 +22,12 @@ public class MartinAutoConfiguration {
     @Bean
     public MartinService martinService(MartinProperties martinProperties) {
         return new MartinService(martinProperties.getNames());
+    }
+
+    @Bean
+    @DependsOn(value = {"stringRedisTemplate"})
+    public DLockService dLockService() {
+        DLockService dLockService = new DLockService();
+        return dLockService;
     }
 }

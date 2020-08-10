@@ -5,3 +5,10 @@ martin:
       - martin
       - test1
       - test2
+
+spring:
+  redis:
+    host: ip
+    port: 6379
+    database: 0
+    password: password
